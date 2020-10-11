@@ -1,1 +1,0 @@
-alert("Charla Widget " + window.charla_property_id);
