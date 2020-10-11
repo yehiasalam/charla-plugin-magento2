@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="charla" translate="label" sortOrder="10">
+            <label>Charla</label>
+        </tab>
+        <section id="charla" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Widget Settings</label>
+            <tab>charla</tab>
+            <resource>Charla_Widget::widget_settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Widget Settings</label>
+                <field id="property" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Property ID</label>
+                    <comment>Enter your Property Public Key found on the Settings page in Charla Backend. Navigate to your property and you will find the public key in the General section.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,19 @@
+<script>
+
+window.charla_property_id = "<?php echo $block->getPropertyId() ?>";
+
+window.addEventListener('load', () => {
+
+    if (!window.charla_property_id) return;
+
+    const widgetElement = document.createElement('charla-widget');
+    widgetElement.setAttribute("p", window.charla_property_id);
+    document.body.appendChild(widgetElement) ;
+
+    const widgetCode = document.createElement('script');
+    widgetCode.src = 'https://app.getcharla.com/widget/widget.js';
+    document.body.appendChild(widgetCode);
+
+});
+
+</script>
