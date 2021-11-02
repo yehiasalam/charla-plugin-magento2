@@ -9,6 +9,7 @@
         <policy id="connect-src">
             <values>
                 <value id="charla-connect" type="host">https://app.getcharla.com</value>
+                <value id="charla-connect-wss" type="host">wss://app.getcharla.com</value>
             </values>
         </policy>
         <policy id="img-src">
