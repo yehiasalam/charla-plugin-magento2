@@ -9,10 +9,10 @@ class WidgetCode extends \Magento\Framework\View\Element\Template
 
     public function __construct(
         Template\Context $context, 
-        array $data = array(),
-        \Charla\Widget\Helper\Data $helper)
+        \Charla\Widget\Helper\Data $helper
+        )
     {
-        parent::__construct($context, $data);
+        parent::__construct($context);
         $this->_helper = $helper;
     
     }
