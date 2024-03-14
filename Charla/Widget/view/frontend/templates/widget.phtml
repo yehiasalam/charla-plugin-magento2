@@ -8,6 +8,7 @@ window.addEventListener('load', () => {
 
     const widgetElement = document.createElement('charla-widget');
     widgetElement.setAttribute("p", window.charla_property_id);
+    widgetElement.setAttribute("wc_cart", '<?php echo $block->getCartTotals() ?>');
     document.body.appendChild(widgetElement) ;
 
     const widgetCode = document.createElement('script');
@@ -17,4 +18,3 @@ window.addEventListener('load', () => {
 });
 
 </script>
-

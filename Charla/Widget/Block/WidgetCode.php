@@ -14,11 +14,17 @@ class WidgetCode extends \Magento\Framework\View\Element\Template
     {
         parent::__construct($context);
         $this->_helper = $helper;
-    
+        $this->_isScopePrivate = true;
     }
 
     public function getPropertyId() {
 
         return $this->_helper->getPropertyId();
     }
+
+    public function getCartTotals() {
+
+        return $this->_helper->getCartTotals();
+    }
+
 }
