@@ -52,9 +52,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCartTotals(){
 
         $mediaUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);        
-        
-        // Not working outside the checkout page
-        //$products = $this->cart->getQuote()->getAllVisibleItems();
 
         // Get the products
         $quote = $this->checkout_session_factory->create()->getQuote();
@@ -68,7 +65,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $p = $this->productRepositoryFactory->create()->getById($product->getProductId());
 
             $items[] = array(
-                'id' => $product->getProductId(),
                 'name' => $product->getName(),
                 'sku' => $product->getSku(),
                 'quantity' => $product->getQty(),
@@ -88,7 +84,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         $isLoggedIn = $this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
         
         if( $isLoggedIn == 1){
-            $this->log->log('User is logged in : ' . $isLoggedIn);
             $customer_id = $customer->getCustomer()->getId();
             $customer_email = $customer->getCustomer()->getEmail();
         }
@@ -99,16 +94,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $mtotals = $this->block_cart->getTotals();
         }
         $totals = (array(
-            'subtotal' => is_null($mtotals['subtotal']['value']) ? 0 : $mtotals['subtotal']['value'],
-            'tax' => is_null($mtotals['tax']['value']) ? 0 : $mtotals['tax']['value'],
-            'shipping' => is_null($mtotals['shipping']['value']) ? 0 : $mtotals['shipping']['value'],
-            'grand_total' => is_null($mtotals['grand_total']['value']) ? 0 : $mtotals['grand_total']['value']
+            'subtotal' => is_null($mtotals['subtotal']['value']) ? '0' : $mtotals['subtotal']['value'],
+            'shipping_total' => is_null($mtotals['shipping']['value']) ? '0' : $mtotals['shipping']['value'],
+            'total' => is_null($mtotals['grand_total']['value']) ? '0' : $mtotals['grand_total']['value']
         ));
 
-        $this->log->log('testing...');
         return json_encode(array(
-            'shop' => 'magento24612',
-            'id' => $customer_id,
+            'shop' => 'magento2',
             'email' => $customer_email,
             'totals' => $totals,
             'items' => $items,
