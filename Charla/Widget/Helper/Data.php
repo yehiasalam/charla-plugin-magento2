@@ -12,7 +12,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     protected $customer_session_factory;
     protected $checkout_session_factory;
     protected $block_cart;
-    protected $proxy_session;
 
     public function __construct( 
             \Magento\Framework\App\Helper\Context $context, 
@@ -23,7 +22,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             \Magento\Checkout\Model\SessionFactory $checkout_session_factory,
             \Magento\Customer\Model\SessionFactory $customer_session_factory,
             \Magento\Checkout\Block\Cart $block_cart,
-            \Magento\Checkout\Model\Session\Proxy $proxy_session,
             \Magento\Framework\App\Http\Context $httpContext ) {
             
                             
@@ -37,7 +35,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
              $this->checkout_session_factory = $checkout_session_factory;
              $this->block_cart = $block_cart;
              $this->httpContext = $httpContext;
-             $this->proxy_session = $proxy_session;
     }
 
     public function getPropertyId()
@@ -68,7 +65,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
                 'name' => $product->getName(),
                 'sku' => $product->getSku(),
                 'quantity' => $product->getQty(),
-                'price' => $product->getPrice(),
+                'price' => strval($product->getPrice()),
                 'permalink' => $p->getUrlModel()->getUrl($p),
                 'image' => array(
                     'source' => $mediaUrl . 'catalog/product' . $p->getData('thumbnail')
@@ -94,9 +91,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             $mtotals = $this->block_cart->getTotals();
         }
         $totals = (array(
-            'subtotal' => is_null($mtotals['subtotal']['value']) ? '0' : $mtotals['subtotal']['value'],
-            'shipping_total' => is_null($mtotals['shipping']['value']) ? '0' : $mtotals['shipping']['value'],
-            'total' => is_null($mtotals['grand_total']['value']) ? '0' : $mtotals['grand_total']['value']
+            'subtotal' => is_null($mtotals['subtotal']['value']) ? '0' : strval($mtotals['subtotal']['value']),
+            'shipping_total' => is_null($mtotals['shipping']['value']) ? '0' : strval($mtotals['shipping']['value']),
+            'total' => is_null($mtotals['grand_total']['value']) ? '0' : strval($mtotals['grand_total']['value'])
         ));
 
         return json_encode(array(
