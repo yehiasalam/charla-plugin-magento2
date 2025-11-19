@@ -1,6 +1,6 @@
 <script>
 
-window.charla_property_id = "<?php echo $block->getPropertyId() ?>";
+window.charla_property_id = "<?php echo $block->escapeJs($block->getPropertyId()) ?>";
 
 window.addEventListener('load', () => {
 
@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 
     const widgetElement = document.createElement('charla-widget');
     widgetElement.setAttribute("p", window.charla_property_id);
-    widgetElement.setAttribute("shop-data", '<?php echo $block->getCartTotals() ?>');
+    widgetElement.setAttribute("shop-data", '<?php echo $block->escapeJs($block->getCartTotals()) ?>');
     document.body.appendChild(widgetElement) ;
 
     const widgetCode = document.createElement('script');
